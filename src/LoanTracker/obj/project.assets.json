@@ -487,11 +487,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/illumiwulvv/Documents/programms/uni/csharp/test/src/LoanTracker/LoanTracker.csproj",
+      "projectUniqueName": "/home/illumiwulvv/Documents/programms/uni/csharp/LoanTracker/src/LoanTracker/LoanTracker.csproj",
       "projectName": "LoanTracker",
-      "projectPath": "/home/illumiwulvv/Documents/programms/uni/csharp/test/src/LoanTracker/LoanTracker.csproj",
+      "projectPath": "/home/illumiwulvv/Documents/programms/uni/csharp/LoanTracker/src/LoanTracker/LoanTracker.csproj",
       "packagesPath": "/home/illumiwulvv/.nuget/packages/",
-      "outputPath": "/home/illumiwulvv/Documents/programms/uni/csharp/test/src/LoanTracker/obj/",
+      "outputPath": "/home/illumiwulvv/Documents/programms/uni/csharp/LoanTracker/src/LoanTracker/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/illumiwulvv/.nuget/NuGet/NuGet.Config"

@@ -1,4 +1,4 @@
-@LoanTracker_HostAddress = http://localhost:5236
+@LoanTracker_HostAddress = http://localhost:5207
 
 GET {{LoanTracker_HostAddress}}/weatherforecast/
 Accept: application/json

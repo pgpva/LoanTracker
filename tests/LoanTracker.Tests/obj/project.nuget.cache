@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "D/Z59lHEH7jZFO1CEBll7+lEEwGNXYibZnno9Bjxej1TLX4pCj33kT4/uzQhLJog0nrzgWp9lZtTybeGl1OeSg==",
+  "dgSpecHash": "uTyqTjMFNLbtBqItTwlc6pJGqpcyPRoZJ/obEVgl15gE1Y+GvLcUiKjLyUKJvN0iZ691L3Jl5i0x2yD7KqADGg==",
   "success": true,
-  "projectFilePath": "/home/illumiwulvv/Documents/programms/uni/csharp/test/tests/LoanTracker.Tests/LoanTracker.Tests.csproj",
+  "projectFilePath": "/home/illumiwulvv/Documents/programms/uni/csharp/LoanTracker/tests/LoanTracker.Tests/LoanTracker.Tests.csproj",
   "expectedPackageFiles": [
     "/home/illumiwulvv/.nuget/packages/coverlet.collector/6.0.0/coverlet.collector.6.0.0.nupkg.sha512",
     "/home/illumiwulvv/.nuget/packages/microsoft.aspnetcore.openapi/8.0.11/microsoft.aspnetcore.openapi.8.0.11.nupkg.sha512",

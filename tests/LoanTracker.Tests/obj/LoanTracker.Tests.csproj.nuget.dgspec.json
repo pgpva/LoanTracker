@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/illumiwulvv/Documents/programms/uni/csharp/test/tests/LoanTracker.Tests/LoanTracker.Tests.csproj": {}
+    "/home/illumiwulvv/Documents/programms/uni/csharp/LoanTracker/tests/LoanTracker.Tests/LoanTracker.Tests.csproj": {}
   },
   "projects": {
-    "/home/illumiwulvv/Documents/programms/uni/csharp/test/src/LoanTracker/LoanTracker.csproj": {
+    "/home/illumiwulvv/Documents/programms/uni/csharp/LoanTracker/src/LoanTracker/LoanTracker.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/illumiwulvv/Documents/programms/uni/csharp/test/src/LoanTracker/LoanTracker.csproj",
+        "projectUniqueName": "/home/illumiwulvv/Documents/programms/uni/csharp/LoanTracker/src/LoanTracker/LoanTracker.csproj",
         "projectName": "LoanTracker",
-        "projectPath": "/home/illumiwulvv/Documents/programms/uni/csharp/test/src/LoanTracker/LoanTracker.csproj",
+        "projectPath": "/home/illumiwulvv/Documents/programms/uni/csharp/LoanTracker/src/LoanTracker/LoanTracker.csproj",
         "packagesPath": "/home/illumiwulvv/.nuget/packages/",
-        "outputPath": "/home/illumiwulvv/Documents/programms/uni/csharp/test/src/LoanTracker/obj/",
+        "outputPath": "/home/illumiwulvv/Documents/programms/uni/csharp/LoanTracker/src/LoanTracker/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/illumiwulvv/.nuget/NuGet/NuGet.Config"
@@ -76,14 +76,14 @@
         }
       }
     },
-    "/home/illumiwulvv/Documents/programms/uni/csharp/test/tests/LoanTracker.Tests/LoanTracker.Tests.csproj": {
+    "/home/illumiwulvv/Documents/programms/uni/csharp/LoanTracker/tests/LoanTracker.Tests/LoanTracker.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/illumiwulvv/Documents/programms/uni/csharp/test/tests/LoanTracker.Tests/LoanTracker.Tests.csproj",
+        "projectUniqueName": "/home/illumiwulvv/Documents/programms/uni/csharp/LoanTracker/tests/LoanTracker.Tests/LoanTracker.Tests.csproj",
         "projectName": "LoanTracker.Tests",
-        "projectPath": "/home/illumiwulvv/Documents/programms/uni/csharp/test/tests/LoanTracker.Tests/LoanTracker.Tests.csproj",
+        "projectPath": "/home/illumiwulvv/Documents/programms/uni/csharp/LoanTracker/tests/LoanTracker.Tests/LoanTracker.Tests.csproj",
         "packagesPath": "/home/illumiwulvv/.nuget/packages/",
-        "outputPath": "/home/illumiwulvv/Documents/programms/uni/csharp/test/tests/LoanTracker.Tests/obj/",
+        "outputPath": "/home/illumiwulvv/Documents/programms/uni/csharp/LoanTracker/tests/LoanTracker.Tests/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/illumiwulvv/.nuget/NuGet/NuGet.Config"
@@ -98,8 +98,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/illumiwulvv/Documents/programms/uni/csharp/test/src/LoanTracker/LoanTracker.csproj": {
-                "projectPath": "/home/illumiwulvv/Documents/programms/uni/csharp/test/src/LoanTracker/LoanTracker.csproj"
+              "/home/illumiwulvv/Documents/programms/uni/csharp/LoanTracker/src/LoanTracker/LoanTracker.csproj": {
+                "projectPath": "/home/illumiwulvv/Documents/programms/uni/csharp/LoanTracker/src/LoanTracker/LoanTracker.csproj"
               }
             }
           }

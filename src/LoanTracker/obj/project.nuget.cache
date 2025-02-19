@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "G9a8h0mL8ux7eeDScFR3SL6IZP3dzO29WtUAOhx55xxGi7/ZNldXnjWYfOv/wqeJy00aFbJGZgAeQoiaqqaUWw==",
+  "dgSpecHash": "7+La1km80s3ET4oAxAQZECrhEuXpXhlbZSNzDqR0bOm49Bp7tDhfoouBHDW9UbmCiBJoeK0hiqiVW2BLWbbJFg==",
   "success": true,
-  "projectFilePath": "/home/illumiwulvv/Documents/programms/uni/csharp/test/src/LoanTracker/LoanTracker.csproj",
+  "projectFilePath": "/home/illumiwulvv/Documents/programms/uni/csharp/LoanTracker/src/LoanTracker/LoanTracker.csproj",
   "expectedPackageFiles": [
     "/home/illumiwulvv/.nuget/packages/microsoft.aspnetcore.openapi/8.0.11/microsoft.aspnetcore.openapi.8.0.11.nupkg.sha512",
     "/home/illumiwulvv/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
