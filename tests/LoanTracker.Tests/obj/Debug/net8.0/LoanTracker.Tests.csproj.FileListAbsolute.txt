@@ -103,6 +103,7 @@
 /home/illumiwulvv/Documents/programms/uni/csharp/test/tests/LoanTracker.Tests/obj/Debug/net8.0/LoanTracker.Tests.AssemblyInfoInputs.cache
 /home/illumiwulvv/Documents/programms/uni/csharp/test/tests/LoanTracker.Tests/obj/Debug/net8.0/LoanTracker.Tests.AssemblyInfo.cs
 /home/illumiwulvv/Documents/programms/uni/csharp/test/tests/LoanTracker.Tests/obj/Debug/net8.0/LoanTracker.Tests.csproj.CoreCompileInputs.cache
+/home/illumiwulvv/Documents/programms/uni/csharp/test/tests/LoanTracker.Tests/obj/Debug/net8.0/LoanTracker.Tests.sourcelink.json
 /home/illumiwulvv/Documents/programms/uni/csharp/test/tests/LoanTracker.Tests/obj/Debug/net8.0/LoanTracker.Tests.csproj.CopyComplete
 /home/illumiwulvv/Documents/programms/uni/csharp/test/tests/LoanTracker.Tests/obj/Debug/net8.0/LoanTracker.Tests.dll
 /home/illumiwulvv/Documents/programms/uni/csharp/test/tests/LoanTracker.Tests/obj/Debug/net8.0/refint/LoanTracker.Tests.dll

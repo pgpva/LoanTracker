@@ -17,6 +17,7 @@
 /home/illumiwulvv/Documents/programms/uni/csharp/test/src/LoanTracker/obj/Debug/net8.0/LoanTracker.csproj.CoreCompileInputs.cache
 /home/illumiwulvv/Documents/programms/uni/csharp/test/src/LoanTracker/obj/Debug/net8.0/LoanTracker.MvcApplicationPartsAssemblyInfo.cs
 /home/illumiwulvv/Documents/programms/uni/csharp/test/src/LoanTracker/obj/Debug/net8.0/LoanTracker.MvcApplicationPartsAssemblyInfo.cache
+/home/illumiwulvv/Documents/programms/uni/csharp/test/src/LoanTracker/obj/Debug/net8.0/LoanTracker.sourcelink.json
 /home/illumiwulvv/Documents/programms/uni/csharp/test/src/LoanTracker/obj/Debug/net8.0/staticwebassets.build.json
 /home/illumiwulvv/Documents/programms/uni/csharp/test/src/LoanTracker/obj/Debug/net8.0/staticwebassets.development.json
 /home/illumiwulvv/Documents/programms/uni/csharp/test/src/LoanTracker/obj/Debug/net8.0/staticwebassets/msbuild.LoanTracker.Microsoft.AspNetCore.StaticWebAssets.props
