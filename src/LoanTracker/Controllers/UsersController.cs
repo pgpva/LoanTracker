@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using LoanTracker.Models;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace LoanTracker.Controllers
@@ -13,32 +12,39 @@ namespace LoanTracker.Controllers
 
         public UsersController(UserService userService)
         {
-            // Инициализация сервиса пользователей
             _userService = userService;
         }
 
-        // Получение списка всех пользователей
         [HttpGet]
         public IActionResult GetUsers()
         {
             var users = _userService.GetAllUsers();
-            return Ok(new { users });
+            var usersDto = users.Select(u => new UserDto
+                    {
+                    Name = u.Name,
+                    Balance = u.Balance,
+                    Owes = u.Owes.OrderBy(i => i.Borrower.Name).ToDictionary(i => i.Borrower.Name, i => i.Amount),
+                    OwedBy = u.OwedBy.OrderBy(i => i.Lender.Name).ToDictionary(i => i.Lender.Name, i => i.Amount)
+                    }).ToList();
+
+            return Ok(new { users = usersDto });
         }
 
-        // Получение информации о пользователе по имени
         [HttpGet("{name}")]
         public IActionResult GetUser(string name)
         {
             var user = _userService.GetUser(name);
             if (user == null)
             {
-                // Обработка случая, когда пользователь не найден
                 return NotFound(new { Message = "User not found." });
             }
 
-            // Получение отсортированных данных
-            var sortedOwes = user.GetSortedOwes();
-            var sortedOwedBy = user.GetSortedOwedBy();
+            // Здесь уже используется база данных для получения задолженностей
+            var sortedOwes = user.Owes.OrderBy(i => i.Borrower.Name)
+                                      .ToDictionary(i => i.Borrower.Name, i => i.Amount);
+            var sortedOwedBy = user.OwedBy.OrderBy(i => i.Lender.Name)
+                                           .ToDictionary(i => i.Lender.Name, i => i.Amount);
+
             return Ok(new
             {
                 user = new
@@ -51,7 +57,6 @@ namespace LoanTracker.Controllers
             });
         }
 
-        // Создание нового пользователя
         [HttpPost]
         public IActionResult CreateUser([FromBody] CreateUserRequest request)
         {
@@ -62,14 +67,12 @@ namespace LoanTracker.Controllers
             }
             catch (InvalidOperationException ex)
             {
-                // Обработка конфликта
                 return Conflict(new { Message = ex.Message });
             }
         }
     }
 }
 
-// Запрос для создания пользователя
 public class CreateUserRequest
 {
     public string User { get; set; }

@@ -1,16 +1,22 @@
+using LoanTracker.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Настройка сервисов
+// Register LoanTrackerContext with scoped lifetime (default for DbContext)
+builder.Services.AddDbContext<LoanTrackerContext>(options =>
+    options.UseSqlite("Data Source=loantracker.db"));
+
+// Change UserService to scoped, since it depends on a scoped service (LoanTrackerContext)
+builder.Services.AddScoped<UserService>();
+
 builder.Services.AddControllers();
-// Регистрация сервиса для пользователей
-builder.Services.AddSingleton<UserService>();
 builder.Services.AddEndpointsApiExplorer();
-// Настройка Swagger для документации API
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Использование Swagger в режиме разработки
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -21,10 +27,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-// Настройка HTTPS
 app.UseHttpsRedirection();
-// Настройка маршрутов для контроллеров
 app.MapControllers();
 
-// Запуск приложения
 app.Run();
