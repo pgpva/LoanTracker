@@ -1,35 +1,15 @@
 using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace LoanTracker.Models
 {
     public class User
     {
+        public int Id { get; set; }  // Для Entity Framework необходимо добавить идентификатор
         public string Name { get; set; }
-        public Dictionary<string, double> Owes { get; set; } = new();
-        public Dictionary<string, double> OwedBy { get; set; } = new();
-        public double Balance => CalculateBalance();
-
-        // Метод для вычисления баланса
-        private double CalculateBalance()
-        {
-            double totalOwed = OwedBy.Values.Sum();
-            double totalOwes = Owes.Values.Sum();
-            return totalOwed - totalOwes;
-        }
-
-        // Метод для получения отсортированного списка долгов, которые должны быть возвращены пользователю
-        public Dictionary<string, double> GetSortedOwes()
-        {
-            return Owes.OrderBy(kvp => kvp.Key)
-                .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-        }
-
-        // Метод для получения отсортированного списка долгов, которые пользователь должен вернуть
-        public Dictionary<string, double> GetSortedOwedBy()
-        {
-            return OwedBy.OrderBy(kvp => kvp.Key)
-                .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-        }
-
+        public List<Iou> Owes { get; set; } = new List<Iou>();
+        public List<Iou> OwedBy { get; set; } = new List<Iou>();
+        public double Balance => OwedBy.Sum(i => i.Amount) - Owes.Sum(i => i.Amount);
     }
 }

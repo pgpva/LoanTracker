@@ -9,41 +9,37 @@ public class IouController : ControllerBase
 
     public IouController(UserService userService)
     {
-        // Инициализация сервиса пользователей
         _userService = userService;
     }
 
-    // Создание нового IOU (долга)
     [HttpPost]
     public IActionResult CreateIou([FromBody] IouRequest request)
     {
-        _userService.CreateIou(request.Lender, request.Borrower, request.Amount);
-        var lender = _userService.GetUser(request.Lender);
-        var borrower = _userService.GetUser(request.Borrower);
+        var (lender, borrower) = _userService.CreateIou(request.Lender, request.Borrower, request.Amount);
 
-        // Получение отсортированных данных
+        // После создания IOU обновляем данные пользователей
         var updatedUsers = new
         {
             Lender = new
             {
                 Name = lender.Name,
-                Owes = lender.GetSortedOwes(),
-                OwedBy = lender.GetSortedOwedBy(),
+                Owes = lender.Owes?.OrderBy(i => i.Borrower.Name).ToDictionary(i => i.Borrower.Name, i => i.Amount) ?? new Dictionary<string, double>(),
+                OwedBy = lender.OwedBy?.OrderBy(i => i.Lender.Name).ToDictionary(i => i.Lender.Name, i => i.Amount) ?? new Dictionary<string, double>(),
                 Balance = lender.Balance
             },
             Borrower = new
             {
                 Name = borrower.Name,
-                Owes = borrower.GetSortedOwes(),
-                OwedBy = borrower.GetSortedOwedBy(),
+                Owes = borrower.Owes?.OrderBy(i => i.Borrower.Name).ToDictionary(i => i.Borrower.Name, i => i.Amount) ?? new Dictionary<string, double>(),
+                OwedBy = borrower.OwedBy?.OrderBy(i => i.Lender.Name).ToDictionary(i => i.Lender.Name, i => i.Amount) ?? new Dictionary<string, double>(),
                 Balance = borrower.Balance
             },
         };
+
         return Ok(new { users = updatedUsers });
     }
 }
 
-// Запрос для создания IOU
 public class IouRequest
 {
     public string Lender { get; set; }
