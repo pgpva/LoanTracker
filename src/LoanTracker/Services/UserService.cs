@@ -2,9 +2,6 @@ using LoanTracker.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
-/// <summary>
-/// Сервис для работы с пользователями и долгами.
-/// </summary>
 public class UserService
 {
     private readonly LoanTrackerContext _context;
@@ -50,6 +47,29 @@ public class UserService
         _context.Users.Add(user);
         _context.SaveChanges();
         return user;
+    }
+
+    /// <summary>
+    /// Обновление информации о пользователе.
+    /// </summary>
+    /// <param name="user">Пользователь с обновленными данными.</param>
+    public void UpdateUser(User user)
+    {
+        _context.Users.Update(user);
+        _context.SaveChanges();
+    }
+
+    /// <summary>
+    /// Удаление пользователя и всех связанных с ним долгов.
+    /// </summary>
+    /// <param name="user">Пользователь, которого нужно удалить.</param>
+    public void DeleteUser(User user)
+    {
+        var ious = _context.Ious.Where(i => i.LenderId == user.Id || i.BorrowerId == user.Id).ToList();
+        _context.Ious.RemoveRange(ious);
+
+        _context.Users.Remove(user);
+        _context.SaveChanges();
     }
 
     /// <summary>

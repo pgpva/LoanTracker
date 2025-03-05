@@ -5,9 +5,6 @@ using System.Linq;
 
 namespace LoanTracker.Controllers
 {
-    /// <summary>
-    /// Контроллер для работы с пользователями.
-    /// </summary>
     [ApiController]
     [Route("users")]
     [Authorize]
@@ -88,10 +85,54 @@ namespace LoanTracker.Controllers
                 return Conflict(new { Message = ex.Message });
             }
         }
+
+        /// <summary>
+        /// Обновление имени существующего пользователя.
+        /// </summary>
+        /// <param name="name">Имя пользователя, которое нужно обновить.</param>
+        /// <param name="request">Новая информация для пользователя.</param>
+        /// <returns>Статус обновления.</returns>
+        [HttpPut("{name}")]
+        public IActionResult UpdateUser(string name, [FromBody] UpdateUserRequest request)
+        {
+            var user = _userService.GetUser(name);
+            if (user == null)
+            {
+                return NotFound(new { Message = "User not found." });
+            }
+
+            if (string.IsNullOrWhiteSpace(request.NewName))
+            {
+                return BadRequest(new { Message = "New name cannot be empty or whitespace." });
+            }
+
+            user.Name = request.NewName;
+            _userService.UpdateUser(user);
+            return Ok(new { Message = "User updated successfully." });
+        }
+
+        [HttpDelete("{name}")]
+        public IActionResult DeleteUser(string name)
+        {
+            var user = _userService.GetUser(name);
+            if (user == null)
+            {
+                return NotFound(new { Message = "User not found." });
+            }
+
+            _userService.DeleteUser(user);
+            return Ok(new { Message = "User deleted successfully." });
+        }
     }
 }
 
 public class CreateUserRequest
 {
     public string User { get; set; }
+}
+
+
+public class UpdateUserRequest
+{
+    public string NewName { get; set; }
 }

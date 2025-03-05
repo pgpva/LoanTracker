@@ -2,9 +2,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using LoanTracker.Models;
 
-/// <summary>
-/// Контроллер для работы с долгами (IOU).
-/// </summary>
 [ApiController]
 [Route("iou")]
 [Authorize]
