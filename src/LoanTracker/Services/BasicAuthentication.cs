@@ -14,6 +14,10 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
     public BasicAuthenticationHandler(IOptionsMonitor<AuthenticationSchemeOptions> options, ILoggerFactory logger, System.Text.Encodings.Web.UrlEncoder encoder, ISystemClock clock)
         : base(options, logger, encoder, clock) { }
 
+    /// <summary>
+    /// Обрабатывает аутентификацию с использованием Basic Authentication.
+    /// </summary>
+    /// <returns>Результат аутентификации.</returns>
     protected override Task<AuthenticateResult> HandleAuthenticateAsync()
     {
         if (!Request.Headers.ContainsKey("Authorization"))

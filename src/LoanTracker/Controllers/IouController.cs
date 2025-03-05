@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using LoanTracker.Models;
 
+/// <summary>
+/// Контроллер для работы с долгами (IOU).
+/// </summary>
 [ApiController]
 [Route("iou")]
 [Authorize]
@@ -14,12 +17,16 @@ public class IouController : ControllerBase
         _userService = userService;
     }
 
+    /// <summary>
+    /// Создает новый долг (IOU) между кредитором и заемщиком.
+    /// </summary>
+    /// <param name="request">Запрос с данными долга.</param>
+    /// <returns>Обновленные данные пользователей.</returns>
     [HttpPost]
     public IActionResult CreateIou([FromBody] IouRequest request)
     {
         var (lender, borrower) = _userService.CreateIou(request.Lender, request.Borrower, request.Amount);
 
-        // После создания IOU обновляем данные пользователей
         var updatedUsers = new
         {
             Lender = new

@@ -2,19 +2,39 @@ using LoanTracker.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
+/// <summary>
+/// Сервис для работы с пользователями и долгами.
+/// </summary>
 public class UserService
 {
     private readonly LoanTrackerContext _context;
 
+    /// <summary>
+    /// Конструктор сервиса.
+    /// </summary>
     public UserService(LoanTrackerContext context)
     {
         _context = context;
     }
 
+    /// <summary>
+    /// Получает всех пользователей из базы данных.
+    /// </summary>
+    /// <returns>Список всех пользователей.</returns>
     public List<User> GetAllUsers() => _context.Users.Include(u => u.Owes).ThenInclude(i => i.Borrower).Include(u => u.OwedBy).ThenInclude(i => i.Lender).ToList();
 
+    /// <summary>
+    /// Получает пользователя по имени.
+    /// </summary>
+    /// <param name="name">Имя пользователя.</param>
+    /// <returns>Пользователь с указанным именем или null, если не найден.</returns>
     public User GetUser(string name) => _context.Users.Include(u => u.Owes).ThenInclude(i => i.Borrower).Include(u => u.OwedBy).ThenInclude(i => i.Lender).FirstOrDefault(u => u.Name == name);
 
+    /// <summary>
+    /// Создает нового пользователя.
+    /// </summary>
+    /// <param name="name">Имя нового пользователя.</param>
+    /// <returns>Созданный пользователь.</returns>
     public User CreateUser(string name)
     {
         if (string.IsNullOrWhiteSpace(name))
@@ -32,6 +52,13 @@ public class UserService
         return user;
     }
 
+    /// <summary>
+    /// Создает новый долг (IOU) между кредитором и заемщиком.
+    /// </summary>
+    /// <param name="lenderName">Имя кредитора.</param>
+    /// <param name="borrowerName">Имя заемщика.</param>
+    /// <param name="amount">Сумма долга.</param>
+    /// <returns>Кредитор и заемщик.</returns>
     public (User lender, User borrower) CreateIou(string lenderName, string borrowerName, double amount)
     {
         if (amount <= 0)
@@ -47,38 +74,32 @@ public class UserService
             throw new KeyNotFoundException("Lender or borrower not found.");
         }
 
-        // Проверяем, есть ли уже долг между заемщиком и кредитором
         var existingIou = lender.Owes.FirstOrDefault(i => i.Borrower == borrower);
         if (existingIou != null)
         {
-            // Если долг существует, обновляем его сумму
             existingIou.Amount += amount;
             _context.SaveChanges();
             return (lender, borrower);
         }
 
-        // Попробуем компенсировать возможный обратный долг
         var reverseDebt = lender.OwedBy.FirstOrDefault(i => i.Lender == borrower);
         if (reverseDebt != null)
         {
             double reverseAmount = reverseDebt.Amount;
             if (reverseAmount > amount)
             {
-                // Уменьшаем долг между заемщиком и кредитором
                 reverseDebt.Amount -= amount;
                 _context.SaveChanges();
                 return (lender, borrower);
             }
             else if (reverseAmount < amount)
             {
-                // Уменьшаем сумму долга заемщика и создаем новый долг
                 amount -= reverseAmount;
                 _context.Ious.Remove(reverseDebt);
                 _context.SaveChanges();
             }
             else
             {
-                // Сумма долгов одинаковая - просто удаляем оба долга
                 _context.Ious.Remove(reverseDebt);
                 _context.SaveChanges();
                 return (lender, borrower);
