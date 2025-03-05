@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using LoanTracker.Models;
 
 [ApiController]
 [Route("iou")]
+[Authorize]
 public class IouController : ControllerBase
 {
     private readonly UserService _userService;
