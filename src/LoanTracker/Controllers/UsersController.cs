@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace LoanTracker.Controllers
 {
+    /// <summary>
+    /// Контроллер для работы с пользователями.
+    /// </summary>
     [ApiController]
     [Route("users")]
     [Authorize]
@@ -17,6 +20,10 @@ namespace LoanTracker.Controllers
             _userService = userService;
         }
 
+        /// <summary>
+        /// Получает всех пользователей.
+        /// </summary>
+        /// <returns>Список пользователей.</returns>
         [HttpGet]
         public IActionResult GetUsers()
         {
@@ -32,6 +39,11 @@ namespace LoanTracker.Controllers
             return Ok(new { users = usersDto });
         }
 
+        /// <summary>
+        /// Получает информацию о пользователе по имени.
+        /// </summary>
+        /// <param name="name">Имя пользователя.</param>
+        /// <returns>Информация о пользователе.</returns>
         [HttpGet("{name}")]
         public IActionResult GetUser(string name)
         {
@@ -41,7 +53,6 @@ namespace LoanTracker.Controllers
                 return NotFound(new { Message = "User not found." });
             }
 
-            // Здесь уже используется база данных для получения задолженностей
             var sortedOwes = user.Owes.OrderBy(i => i.Borrower.Name)
                                       .ToDictionary(i => i.Borrower.Name, i => i.Amount);
             var sortedOwedBy = user.OwedBy.OrderBy(i => i.Lender.Name)
@@ -59,6 +70,11 @@ namespace LoanTracker.Controllers
             });
         }
 
+        /// <summary>
+        /// Создает нового пользователя.
+        /// </summary>
+        /// <param name="request">Запрос с данными для создания пользователя.</param>
+        /// <returns>Созданный пользователь.</returns>
         [HttpPost]
         public IActionResult CreateUser([FromBody] CreateUserRequest request)
         {
