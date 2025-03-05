@@ -47,6 +47,44 @@ public class UserService
             throw new KeyNotFoundException("Lender or borrower not found.");
         }
 
+        // Проверяем, есть ли уже долг между заемщиком и кредитором
+        var existingIou = lender.Owes.FirstOrDefault(i => i.Borrower == borrower);
+        if (existingIou != null)
+        {
+            // Если долг существует, обновляем его сумму
+            existingIou.Amount += amount;
+            _context.SaveChanges();
+            return (lender, borrower);
+        }
+
+        // Попробуем компенсировать возможный обратный долг
+        var reverseDebt = lender.OwedBy.FirstOrDefault(i => i.Lender == borrower);
+        if (reverseDebt != null)
+        {
+            double reverseAmount = reverseDebt.Amount;
+            if (reverseAmount > amount)
+            {
+                // Уменьшаем долг между заемщиком и кредитором
+                reverseDebt.Amount -= amount;
+                _context.SaveChanges();
+                return (lender, borrower);
+            }
+            else if (reverseAmount < amount)
+            {
+                // Уменьшаем сумму долга заемщика и создаем новый долг
+                amount -= reverseAmount;
+                _context.Ious.Remove(reverseDebt);
+                _context.SaveChanges();
+            }
+            else
+            {
+                // Сумма долгов одинаковая - просто удаляем оба долга
+                _context.Ious.Remove(reverseDebt);
+                _context.SaveChanges();
+                return (lender, borrower);
+            }
+        }
+
         var iou = new Iou
         {
             Lender = lender,
