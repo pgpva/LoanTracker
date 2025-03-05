@@ -7,15 +7,12 @@ using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add authentication
 builder.Services.AddAuthentication("BasicAuthentication")
     .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", options => { });
 
-// Register LoanTrackerContext with scoped lifetime (default for DbContext)
 builder.Services.AddDbContext<LoanTrackerContext>(options =>
     options.UseSqlite("Data Source=loantracker.db"));
 
-// Change UserService to scoped, since it depends on a scoped service (LoanTrackerContext)
 builder.Services.AddScoped<UserService>();
 
 builder.Services.AddControllers();
